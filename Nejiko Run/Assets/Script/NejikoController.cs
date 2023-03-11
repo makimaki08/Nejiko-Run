@@ -7,18 +7,34 @@ public class NejikoController : MonoBehaviour
     const int MinLane = -2;
     const int MaxLane = 2;
     const float LaneWidth = 1.0f;
+    const int DefaultLife = 3;
+    const float StunDuration = 0.5f;
 
     CharacterController controller;
     Animator animator;
 
     Vector3 moveDirection = Vector3.zero;
     int targetLane;
+    int life = DefaultLife;
+    float recoverTime = 0.0f;
 
     public float gravity;
     public float speedZ;
     public float speedX; // 横方向スピードのパラメータ
     public float speedJump;
     public float accelerationZ; // 前進加速度のパラメータ
+
+    // ライフ取得用関数
+    public int Life()
+    {
+        return life;
+    }
+
+    // 気絶判定
+    bool IsStun()
+    {
+        return recoverTime > 0.0f || life <= 0;
+    }
 
 
     // Start is called before the first frame update
@@ -37,14 +53,23 @@ public class NejikoController : MonoBehaviour
         if (Input.GetKeyDown("right")) MoveToRight();
         if (Input.GetKeyDown("space")) Jump();
 
+        if (IsStun())
+        {
+            // 動きを止め気絶状態からの復帰カウントを進める
+            moveDirection.x = 0.0f;
+            moveDirection.z = 0.0f;
+            recoverTime -= Time.deltaTime;
+        }
+        else
+        {
+            // 徐々に加速しZ方向に常に前進させる
+            float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
+            moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
 
-        // 徐々に加速しZ方向に常に前進させる
-        float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
-        moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
-
-        // X方向は目標のポジションまでの差分の割合で速度を計算
-        float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
-        moveDirection.x = ratioX * speedX;
+            // X方向は目標のポジションまでの差分の割合で速度を計算
+            float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
+            moveDirection.x = ratioX * speedX;
+        }
 
 
         // 重力分の力を毎フレーム追加
@@ -59,20 +84,24 @@ public class NejikoController : MonoBehaviour
 
         // 速度が0以上なら、走っているフラグをtrueにする
         animator.SetBool("run", moveDirection.z > 0.0f);
+
     }
 
     public void MoveToLeft()
     {
+        if (IsStun()) return; // 気絶時の入力キャンセル
         if (controller.isGrounded && targetLane > MinLane) targetLane--;
     }
 
     public void MoveToRight()
     {
+        if (IsStun()) return; // 気絶時の入力キャンセル
         if (controller.isGrounded && targetLane < MaxLane) targetLane++;
     }
 
     public void Jump()
     {
+        if (IsStun()) return; // 気絶時の入力キャンセル
         if (controller.isGrounded)
         {
             moveDirection.y = speedJump; // ジャンプ
@@ -82,5 +111,23 @@ public class NejikoController : MonoBehaviour
         }
     }
 
+    // CharacterControllerに衝突判定が生じたさいの処理
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (IsStun()) return; // 気絶時の入力キャンセル
+
+        if(hit.gameObject.tag == "Robo")
+        {
+            // ライフを減らして気絶状態に移行
+            life--;
+            recoverTime = StunDuration;
+
+            // ダメージトリガーを設定
+            animator.SetTrigger("damage");
+
+            // ヒットしたオブジェクトは削除
+            Destroy(hit.gameObject);
+        }
+    }
 }
 
