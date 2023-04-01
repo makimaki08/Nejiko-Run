@@ -26,6 +26,12 @@ public class GameConroller : MonoBehaviour
             // これ以降のUpdateを止める
             enabled = false;
 
+            // ハイスコアを更新
+            if (PlayerPrefs.GetInt("HighScore") < score)
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+            }
+
             // 2秒後にReturnToTotileを呼び出す
             Invoke("ReturnToTitle", 2.0f); // 第1引数で指定した関数を、第2引数の秒数だけ遅らせて実行する
 
