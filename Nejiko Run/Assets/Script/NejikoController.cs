@@ -19,7 +19,8 @@ public class NejikoController : MonoBehaviour
     float recoverTime = 0.0f;
 
     public float gravity;
-    public float speedZ;
+    public float maxSpeedZ;
+    public float minSpeedZ;
     public float speedX; // 横方向スピードのパラメータ
     public float speedJump;
     public float accelerationZ; // 前進加速度のパラメータ
@@ -63,8 +64,8 @@ public class NejikoController : MonoBehaviour
         else
         {
             // 徐々に加速しZ方向に常に前進させる
-            float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime);
-            moveDirection.z = Mathf.Clamp(acceleratedZ, 0, speedZ);
+            float acceleratedZ = moveDirection.z + (accelerationZ * Time.deltaTime / 30);
+            moveDirection.z = Mathf.Clamp(acceleratedZ, minSpeedZ, maxSpeedZ);
 
             // X方向は目標のポジションまでの差分の割合で速度を計算
             float ratioX = (targetLane * LaneWidth - transform.position.x) / LaneWidth;
