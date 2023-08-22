@@ -1637,6 +1637,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nejiko
       objectReference: {fileID: 0}
+    - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
+      propertyPath: speedZ
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
+      propertyPath: maxSpeedZ
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
+      propertyPath: minSpeedZ
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
+      propertyPath: accelerationZ
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 035876329112c46959d10a646021a5fb, type: 3}
 --- !u!1 &7205719037918073608 stripped
