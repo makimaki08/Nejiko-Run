@@ -1298,6 +1298,14 @@ MonoBehaviour:
   - {fileID: 114390, guid: dcb0bb8eb322e43cea3273797c057e9a, type: 3}
   - {fileID: 114390, guid: 5c4caa5ed22d64f81845b00d9b03cca8, type: 3}
   - {fileID: 114390, guid: 7780e7f5eca6945728dc57d10fce31d6, type: 3}
+  - {fileID: 114390, guid: 61c259d7c022440f4a00d06f932f549e, type: 3}
+  - {fileID: 114390, guid: 85252437bfd454ffba2efaa6fdaef620, type: 3}
+  - {fileID: 114390, guid: 85252437bfd454ffba2efaa6fdaef620, type: 3}
+  - {fileID: 114390, guid: dcb0bb8eb322e43cea3273797c057e9a, type: 3}
+  - {fileID: 114390, guid: 7780e7f5eca6945728dc57d10fce31d6, type: 3}
+  - {fileID: 114390, guid: 61c259d7c022440f4a00d06f932f549e, type: 3}
+  - {fileID: 114390, guid: 85252437bfd454ffba2efaa6fdaef620, type: 3}
+  - {fileID: 114390, guid: 343262cf8893a47c5ae7edf865eb7203, type: 3}
   startChipIndex: 1
   preInstantiate: 5
   generatedStageList: []

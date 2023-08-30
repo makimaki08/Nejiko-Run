@@ -9,9 +9,12 @@ public class NejikoController : MonoBehaviour
     const float LaneWidth = 1.0f;
     const int DefaultLife = 3;
     const float StunDuration = 0.5f;
+    const int MaxLife = 3;
 
     CharacterController controller;
     Animator animator;
+    LifePanel lifePanel;
+
 
     Vector3 moveDirection = Vector3.zero;
     int targetLane;
@@ -24,6 +27,7 @@ public class NejikoController : MonoBehaviour
     public float speedX; // 横方向スピードのパラメータ
     public float speedJump;
     public float accelerationZ; // 前進加速度のパラメータ
+
 
     // ライフ取得用関数
     public int Life()
@@ -126,6 +130,16 @@ public class NejikoController : MonoBehaviour
             // ダメージトリガーを設定
             animator.SetTrigger("damage");
 
+            // ヒットしたオブジェクトは削除
+            Destroy(hit.gameObject);
+        }
+        if (hit.gameObject.tag == "Heart")
+        {
+            // 上限Life以下であれば、回復
+            if (Life() < MaxLife)
+            {
+                life++;
+            }
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
