@@ -132,14 +132,15 @@ public class NejikoController : MonoBehaviour
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
-        else if (hit.gameObject.tag == "Heart")
+        if (hit.gameObject.tag == "Life")
         {
-            // ライフパネルの数より、現在のライフが下の場合
-            if (life<lifePanel.icons.Length)
-            {
-                // ライフを増やす
-                life++;
-            }
+            // 下のぶんが間違えている
+            //// ライフパネルの数より、現在のライフが下の場合
+            //if (life<lifePanel.icons.Length)
+            //{
+            //    // ライフを増やす
+            //    life++;
+            //}
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
