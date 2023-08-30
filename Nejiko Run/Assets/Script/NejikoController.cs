@@ -9,6 +9,7 @@ public class NejikoController : MonoBehaviour
     const float LaneWidth = 1.0f;
     const int DefaultLife = 3;
     const float StunDuration = 0.5f;
+    const int MaxLife = 3;
 
     CharacterController controller;
     Animator animator;
@@ -132,15 +133,13 @@ public class NejikoController : MonoBehaviour
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
-        if (hit.gameObject.tag == "Life")
+        if (hit.gameObject.tag == "Heart")
         {
-            // 下のぶんが間違えている
-            //// ライフパネルの数より、現在のライフが下の場合
-            //if (life<lifePanel.icons.Length)
-            //{
-            //    // ライフを増やす
-            //    life++;
-            //}
+            // 上限Life以下であれば、回復
+            if (Life() < MaxLife)
+            {
+                life++;
+            }
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
