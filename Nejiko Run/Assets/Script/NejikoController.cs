@@ -29,6 +29,8 @@ public class NejikoController : MonoBehaviour
     public float accelerationZ; // 前進加速度のパラメータ
     public AudioClip shot;
     public AudioClip heal;
+    public AudioClip hover;
+    public AudioClip moteStep;
 
 
     // ライフ取得用関数
@@ -99,12 +101,16 @@ public class NejikoController : MonoBehaviour
     {
         if (IsStun()) return; // 気絶時の入力キャンセル
         if (controller.isGrounded && targetLane > MinLane) targetLane--;
+        // 移動時の音声を出力
+        audioSource.PlayOneShot(moteStep);
     }
 
     public void MoveToRight()
     {
         if (IsStun()) return; // 気絶時の入力キャンセル
         if (controller.isGrounded && targetLane < MaxLane) targetLane++;
+        // 移動時の音声を出力
+        audioSource.PlayOneShot(moteStep);
     }
 
     public void Jump()
@@ -116,6 +122,9 @@ public class NejikoController : MonoBehaviour
 
             // ジャンプトリガーを設定
             animator.SetTrigger("jump");
+
+            // ジャンプ時の音声を出力
+            audioSource.PlayOneShot(hover);
         }
     }
 
