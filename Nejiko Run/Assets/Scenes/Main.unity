@@ -1782,6 +1782,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: d6b3ded510f844204a9f62001cece7d6, type: 3}
     - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
+      propertyPath: hover
+      value: 
+      objectReference: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
+    - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
       propertyPath: sound
       value: 
       objectReference: {fileID: 8300000, guid: d6b3ded510f844204a9f62001cece7d6, type: 3}
@@ -1789,6 +1793,10 @@ PrefabInstance:
       propertyPath: speedZ
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
+      propertyPath: moteStep
+      value: 
+      objectReference: {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
     - target: {fileID: 5931994448045192862, guid: 035876329112c46959d10a646021a5fb, type: 3}
       propertyPath: maxSpeedZ
       value: 10
