@@ -14,7 +14,7 @@ public class NejikoController : MonoBehaviour
     CharacterController controller;
     Animator animator;
     LifePanel lifePanel;
-
+    AudioSource audioSource; // 音データの再生装置を格納する変数
 
     Vector3 moveDirection = Vector3.zero;
     int targetLane;
@@ -27,6 +27,8 @@ public class NejikoController : MonoBehaviour
     public float speedX; // 横方向スピードのパラメータ
     public float speedJump;
     public float accelerationZ; // 前進加速度のパラメータ
+    public AudioClip shot;
+    public AudioClip heal;
 
 
     // ライフ取得用関数
@@ -48,6 +50,7 @@ public class NejikoController : MonoBehaviour
         // 必要なコンポーネントを自動取得
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>(); // 音再生装置のコンポーネント
     }
 
     // Update is called once per frame
@@ -130,6 +133,9 @@ public class NejikoController : MonoBehaviour
             // ダメージトリガーを設定
             animator.SetTrigger("damage");
 
+            // 音を一度だけ再生させる
+            audioSource.PlayOneShot(shot);
+
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
@@ -140,6 +146,8 @@ public class NejikoController : MonoBehaviour
             {
                 life++;
             }
+            // 回復サウンドを追加
+            audioSource.PlayOneShot(heal);
             // ヒットしたオブジェクトは削除
             Destroy(hit.gameObject);
         }
